@@ -35,17 +35,25 @@ public class EmployeeServiceImpl  implements EmployeeService {
                 // Assuming the data is present in the first three columns (you can adjust this based on your Excel format)
                 Cell Nom = row.getCell(0);
                 Cell Prenom = row.getCell(1);
-          //      Cell emailCell = row.getCell(2);
+               Cell ContreMetre = row.getCell(2);
+              //  Cell NomGroupe = row.getCell(3);
+                Cell PS = row.getCell(3);
 
-                if (Nom != null && Prenom != null ) {
+                if (Nom != null && Prenom != null && ContreMetre!=null   && PS!=null) {
                     System.out.println(Nom);
                     System.out.println(Prenom);
+                  //  System.out.println(ContreMetre);
                     String NomEmploye = Nom.getStringCellValue();
                     String PrenomEmploye = Prenom.getStringCellValue();
+                    String ContreMetreEmploye = ContreMetre.getStringCellValue();
+               //     String NomGroupeEmployeString = NomGroupe.getStringCellValue();
+              //      Long NomGroupeEmploye = Long.parseLong(NomGroupeEmployeString);
+                    double PSEmployeString = PS.getNumericCellValue();
+                    long  PSEmploye = (long)PSEmployeString;
                  //   String email = emailCell.getStringCellValue();
 
                     // You can perform additional validation and data cleaning here if needed
-                    Employe employee = new Employe(null, null, NomEmploye,PrenomEmploye,null,null,null,null,null);
+                    Employe employee = new Employe(null, null, NomEmploye,PrenomEmploye,ContreMetreEmploye,null,PSEmploye,null,null);
                     employees.add(employee);
                 }
             }

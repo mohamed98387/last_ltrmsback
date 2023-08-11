@@ -13,18 +13,14 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Employe {
+public class PlantSection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long matricule;
-    private String Nom;
-    private String Prenom;
-    private String ContreMetre;
-    private Long NomGroupe;
-    private Long PS;
-    private Long telephone;
-    private String centreCout;
-
-
+    private String nomPs;
+    private String descriptionPS;
+    private String emplacementPS;
+    private String psManager;
+    private String responsableRH;
+    private String organisation;
 }

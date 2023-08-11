@@ -28,13 +28,13 @@ public class SecServiceApplication {
         return new BCryptPasswordEncoder();
     }
 
-/*    @Bean
+ /*   @Bean
    CommandLineRunner start(AccountService accountService){
         return args ->{
-          accountService.addNewRole(new AppRole(null,"RH_SEGMENT",null));
-           accountService.addNewRole(new AppRole(null,"ADMIN",null));
-         accountService.addNewRole(new AppRole(null,"CHEF_SEGMENT",null));
-           accountService.addNewRole(new AppRole(null,"RESPONSABLE_TRANSPORT",null));
+          accountService.addNewRole(new AppRole(null,"RH_SEGMENT",null,null));
+           accountService.addNewRole(new AppRole(null,"ADMIN",null,null));
+         accountService.addNewRole(new AppRole(null,"CHEF_SEGMENT",null,null));
+           accountService.addNewRole(new AppRole(null,"RESPONSABLE_TRANSPORT",null,null));
 
            accountService.addNewUser(new AppUser(null,"null","user1",null,null,null,null,null,null,"8080",new ArrayList<>()));
            accountService.addNewUser(new AppUser(null,"null","admin",null,null,null,null,null,null,"8080",new ArrayList<>()));
