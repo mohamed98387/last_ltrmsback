@@ -47,4 +47,8 @@ public class PlantSectionRestController {
     public void removePlantSection(@PathVariable("plantSection-id") Long id) {
         plantSectionService.removePlantSection(id);
     }
+    @GetMapping(path = "/getPlantSectionbyname/{nomPs}")
+    public PlantSection getPlantSectionbyname(@PathVariable("nomPs") String nomPs) {
+        return plantSectionService.findPlantSectionBynomPs(nomPs);
+    }
 }

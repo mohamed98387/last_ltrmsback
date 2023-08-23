@@ -28,7 +28,7 @@ public class SecServiceApplication {
         return new BCryptPasswordEncoder();
     }
 
- /*   @Bean
+ /*@Bean
    CommandLineRunner start(AccountService accountService){
         return args ->{
           accountService.addNewRole(new AppRole(null,"RH_SEGMENT",null,null));

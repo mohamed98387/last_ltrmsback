@@ -10,4 +10,5 @@ public interface PlantSectionService {
     List<PlantSection> listPlantSection();
     public PlantSection updatePlantSection(PlantSection plantSection);
     public void removePlantSection(Long id);
+    PlantSection findPlantSectionBynomPs(String nomPs);
 }

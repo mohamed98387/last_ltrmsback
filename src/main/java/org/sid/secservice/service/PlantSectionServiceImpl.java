@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-
 public class PlantSectionServiceImpl implements PlantSectionService {
     private PlantSectionRepository plantSectionRepository;
 
@@ -36,5 +35,10 @@ public class PlantSectionServiceImpl implements PlantSectionService {
     @Override
     public void removePlantSection(Long id) {
         plantSectionRepository.deleteById(id);
+    }
+
+    @Override
+    public PlantSection findPlantSectionBynomPs(String nomPs) {
+        return plantSectionRepository.findPlantSectionBynomPs(nomPs);
     }
 }
