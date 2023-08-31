@@ -66,7 +66,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
  "/users/**","/update-user/**","/roles","/permissions","/addrole","/update-role","/remove-role/**",
  "/addpermission","/update-permission","/remove-permission/**","/import-employees","/remove-user/**"
   ,"/update-plantSection","/Segments","/addsegment","/update-Segment","/remove-segment/**","/employees",
-"/agences", "/addagence","/update-agence","/remove-agence/**" ).permitAll();
+"/agences", "/addagence","/update-agence","/remove-agence/**","/addvehicule","/vehicules" ,
+  "/update-vehicule","/remove-vehicule/**","/addchauffeur","/chauffeurs","/update-chauffeur","/remove-chauffeur/**"
+,"/getChauffeurbynom/**").permitAll();
         //http.formLogin();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/users/**").hasAuthority("ADMIN") ;
     //   http.authorizeRequests().antMatchers(HttpMethod.PUT,"/update-user/**").hasAnyAuthority("ADMIN") ;

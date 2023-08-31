@@ -1,19 +1,19 @@
 package org.sid.secservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Agence {
+public class Agence implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,4 +25,10 @@ public class Agence {
     private String horaireTravail;
     private String email;
     private String siteInternet;
+    @OneToMany( mappedBy="agence")
+    @JsonIgnore
+    private Set<Vehicule> Vehicules;
+    @OneToMany( mappedBy="agence")
+    @JsonIgnore
+    private Set<Chauffeur> Chauffeures;
 }

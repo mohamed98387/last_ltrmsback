@@ -27,7 +27,7 @@ public class Segment implements Serializable {
     private String ps;
     private String rhSegment;
     private String chefSegment;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="segment")
+    @OneToMany( mappedBy="segment")
     @JsonIgnore
     private Set<Employe> Employes;
 

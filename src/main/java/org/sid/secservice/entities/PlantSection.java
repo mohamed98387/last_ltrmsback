@@ -25,7 +25,7 @@ public class PlantSection implements Serializable {
     private String psManager;
     private String responsableRH;
     private String organisation;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="ps")
+    @OneToMany( mappedBy="ps")
      @JsonIgnore
     private Set<Employe> Employes;
 

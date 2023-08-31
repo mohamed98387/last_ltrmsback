@@ -45,4 +45,8 @@ public class AgenceRestController {
     public void removeAgence(@PathVariable("agence-id") Long id) {
         agenceService.removeAgence(id);
     }
+    @GetMapping(path = "/getAgencebynom/{nom}")
+    public Agence getAgencebynom(@PathVariable("nom") String nom) {
+        return agenceService.findAgenceBynom(nom);
+    }
 }

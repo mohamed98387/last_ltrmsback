@@ -10,4 +10,5 @@ public interface AgenceService {
     List<Agence> listAgence();
     public Agence updateAgence(Agence agence);
     public void removeAgence(Long id);
+    Agence findAgenceBynom(String nom);
 }
