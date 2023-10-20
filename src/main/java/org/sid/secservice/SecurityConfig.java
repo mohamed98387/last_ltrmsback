@@ -68,7 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   ,"/update-plantSection","/Segments","/addsegment","/update-Segment","/remove-segment/**","/employees",
 "/agences", "/addagence","/update-agence","/remove-agence/**","/addvehicule","/vehicules" ,
   "/update-vehicule","/remove-vehicule/**","/addchauffeur","/chauffeurs","/update-chauffeur","/remove-chauffeur/**"
-,"/getChauffeurbynom/**").permitAll();
+,"/getChauffeurbynom/**","/addcircuit","/circuits","/update-circuit","/remove-circuit/**","/addstation",
+  "/update-station","/stations","/remove-station/**","import-planificationProductions?**","/import-employees" ).permitAll();
         //http.formLogin();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/users/**").hasAuthority("ADMIN") ;
     //   http.authorizeRequests().antMatchers(HttpMethod.PUT,"/update-user/**").hasAnyAuthority("ADMIN") ;

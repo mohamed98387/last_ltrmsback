@@ -2,10 +2,7 @@ package org.sid.secservice.service;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.sid.secservice.entities.AppRole;
-import org.sid.secservice.entities.Employe;
-import org.sid.secservice.entities.PlantSection;
-import org.sid.secservice.entities.Segment;
+import org.sid.secservice.entities.*;
 import org.sid.secservice.repo.EmployeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +22,11 @@ public class EmployeeServiceImpl  implements EmployeeService {
     private EmployeRepository employeeRepository;
     private PlantSectionService plantSectionService;
     private SegmentService segmentService;
+    private StationService stationService;
+
+    public EmployeeServiceImpl(StationService stationService) {
+        this.stationService = stationService;
+    }
 
     public EmployeeServiceImpl(PlantSectionService plantSectionService) {
         this.plantSectionService = plantSectionService;
@@ -38,11 +40,14 @@ public class EmployeeServiceImpl  implements EmployeeService {
         this.segmentService = segmentService;
     }
     @Autowired
-    public EmployeeServiceImpl(EmployeRepository employeeRepository, PlantSectionService plantSectionService, SegmentService segmentService) {
+    public EmployeeServiceImpl(EmployeRepository employeeRepository, PlantSectionService plantSectionService, SegmentService segmentService, StationService stationService) {
         this.employeeRepository = employeeRepository;
         this.plantSectionService = plantSectionService;
         this.segmentService = segmentService;
+        this.stationService = stationService;
     }
+
+
 
 
 
@@ -68,9 +73,10 @@ public class EmployeeServiceImpl  implements EmployeeService {
                 Cell telephone = row.getCell(6);
                 Cell matricule = row.getCell(7);
                 Cell segment = row.getCell(8);
+                Cell station = row.getCell(9);
 
                 if (nom != null && prenom != null && contreMetre!=null && PS!=null&& nomGroupe!=null
-                        && centreCout!=null && telephone!=null && matricule!=null && segment!=null) {
+                        && centreCout!=null && telephone!=null && matricule!=null && segment!=null&& station!=null) {
 
                     String NomEmploye = nom.getStringCellValue();
                     String PrenomEmploye = prenom.getStringCellValue();
@@ -84,13 +90,16 @@ public class EmployeeServiceImpl  implements EmployeeService {
                     double matriculeEmployeString = matricule.getNumericCellValue();
                     long  matriculeEmploye = (long)matriculeEmployeString;
                     String segmentEmployeString = segment.getStringCellValue();
+                    String stationEmployeString = station.getStringCellValue();
                  //   String email = emailCell.getStringCellValue();
                     PlantSection psEmploye = this.plantSectionService.findPlantSectionBynomPs(PSEmployeString);
                     Segment segmentEmploye = this.segmentService.findSegmentBynomSegment(segmentEmployeString);
+                    Station stationEmploye = this.stationService.findStationByrefRegion(stationEmployeString);
                     // You can perform additional validation and data cleaning here if needed
                     System.out.println(psEmploye);
                     System.out.println(segmentEmploye);
-                    Employe employee = new Employe(null,matriculeEmploye,NomEmploye,PrenomEmploye,ContreMetreEmploye,NomGroupeEmployeString,telephoneEmploye,centreCoutEmploye,psEmploye,segmentEmploye);
+                    System.out.println(stationEmploye);
+                    Employe employee = new Employe(null,matriculeEmploye,NomEmploye,PrenomEmploye,ContreMetreEmploye,NomGroupeEmployeString,telephoneEmploye,centreCoutEmploye,psEmploye,segmentEmploye,stationEmploye);
 
                     employee.setPs(psEmploye);
                     employee.setSegment(segmentEmploye);

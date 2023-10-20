@@ -30,5 +30,7 @@ public class Employe implements Serializable {
     PlantSection ps;
     @ManyToOne
     Segment segment;
+    @ManyToOne
+    Station station;
 
 }

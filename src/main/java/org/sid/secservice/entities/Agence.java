@@ -31,4 +31,8 @@ public class Agence implements Serializable {
     @OneToMany( mappedBy="agence")
     @JsonIgnore
     private Set<Chauffeur> Chauffeures;
+    @OneToMany( mappedBy="agence")
+    @JsonIgnore
+    private Set<Circuit> Circuits;
+
 }
