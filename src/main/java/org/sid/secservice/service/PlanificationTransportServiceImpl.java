@@ -5,11 +5,18 @@ import org.sid.secservice.repo.CircuitRepository;
 import org.sid.secservice.repo.EmployeRepository;
 import org.sid.secservice.repo.PlanificationTransportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.mail.internet.MimeMessage;
 @Service
 public class PlanificationTransportServiceImpl implements PlanificationTransportService  {
     private PlanificationProductionService planificationProductionService;
@@ -20,7 +27,8 @@ public class PlanificationTransportServiceImpl implements PlanificationTransport
 
     private CircuitService circuitService;
     private CircuitRepository circuitRepository;
-
+    @Autowired
+    private JavaMailSender emailSender;
     public PlanificationTransportServiceImpl(PlanificationProductionService planificationProductionService) {
         this.planificationProductionService = planificationProductionService;
     }
@@ -69,6 +77,7 @@ public class PlanificationTransportServiceImpl implements PlanificationTransport
     @Override
     public List<PlanificationTransport> calculPlanificationTransport(String agence) {
         List<PlanificationProduction> planificationProduction = this.planificationProductionService.listPlanificationProductions();
+        List<PlanificationTransport> AllplanificationTransport = this.planificationTransportRepository.findAll();
         List<Employe> employes = this.employeeService.listEmployes();
         List<Circuit> circuits = this.circuitService.listCircuit();
         List<PlanificationTransport> planfications = new ArrayList<>();
@@ -88,74 +97,287 @@ public class PlanificationTransportServiceImpl implements PlanificationTransport
                                 Long samediValue = planificationProductionn.getSamedi();
                                 if (dimancheValue != null) {
                                     if (dimancheValue == 5301350 ) {
+
                                         PlanificationTransport planificationTransport = createPlanificationTransport("dimanche", 530, 1350, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
+
                                     }
                                     if (dimancheValue == 13502215 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("dimanche", 1350, 2215, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
+
                                     }
                                 }
                                 if (lundiValue != null) {
                                     if (lundiValue == 5301350 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("lundi", 530, 1350, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                     if (lundiValue == 13502215 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("lundi", 1350, 2215, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 if (mardiValue != null) {
                                     if (mardiValue == 5301350 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("mardi", 530, 1350, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                     if (mardiValue == 13502215 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("mardi", 1350, 2215, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 if (mercrediValue != null) {
                                     if (mercrediValue == 5301350 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("mercredi", 530, 1350, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                     if (mercrediValue == 13502215 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("mercredi", 1350, 2215, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 if (jeudiValue != null) {
                                     if (jeudiValue == 5301350 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("jeudi", 530, 1350, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                     if (jeudiValue == 13502215 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("jeudi", 1350, 2215, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 if (vendrediValue != null) {
                                     if (vendrediValue == 5301350 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("vendredi", 530, 1350, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
 
                                     if (vendrediValue == 13502215 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("vendredi", 1350, 2215, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 if (samediValue != null) {
                                     if (samediValue == 5301350 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("samedi", 530, 1350, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
 
                                     if (samediValue == 13502215 ) {
                                         PlanificationTransport planificationTransport = createPlanificationTransport("samedi", 1350, 2215, planfications,agence,circuit.getRefChemin());
-                                        planificationTransportRepository.save(planificationTransport);
+                                        if(AllplanificationTransport.isEmpty()){
+                                            planificationTransportRepository.save(planificationTransport);
+                                        }  else{
+                                            for( PlanificationTransport allplanificationTransport :AllplanificationTransport){
+
+
+
+                                                if(allplanificationTransport.getAgence().equals(agence) ){
+                                                    return null;
+                                                }else{
+                                                    System.out.println(allplanificationTransport.getAgence());
+                                                    planificationTransportRepository.save(planificationTransport);
+
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -166,6 +388,11 @@ public class PlanificationTransportServiceImpl implements PlanificationTransport
         }
 
         return planfications;
+    }
+
+    @Override
+    public void deleteAllData() {
+        planificationTransportRepository.deleteAll();
     }
 
     private PlanificationTransport createPlanificationTransport(String jourSemaine, int debutPoste, int finPoste, List<PlanificationTransport> planfications,String agence,String circuit) {

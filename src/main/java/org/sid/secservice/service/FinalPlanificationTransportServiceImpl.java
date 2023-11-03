@@ -34,20 +34,29 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
     }
 
 
-
-
-
+    @Override
+    public List<FinalPlanificationTransport> lisFinalPlanificationTransports() {
+        return finalPlanificationTransportRepository.findAll();
+    }
 
     @Override
-    public List<FinalPlanificationTransport> newlPlanificationTransport() {
+    public List<FinalPlanificationTransport> newlPlanificationTransport(String agence) {
         int totalEmployees = 0;
         boolean existingObjectFound = false;
+        boolean x = false;
         List<PlanificationTransport> planfications = this.planificationTransportRepository.findAll();
-
+        List<FinalPlanificationTransport> finalPlanificationTransports = this.finalPlanificationTransportRepository.findAll();
+        for (FinalPlanificationTransport finalplanificationTransport : finalPlanificationTransports) {
+            if(finalplanificationTransport.getAgence().equals(agence)){
+                x=true;
+            }
+        }
         for (PlanificationTransport planificationTransport : planfications) {
             if (planificationTransport.getJourSemaine().equals("samedi") &&
-                    planificationTransport.getDebutPoste() == 530) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("samedi", 530);
+                    planificationTransport.getDebutPoste() == 530 && planificationTransport.getAgence().equals(agence)
+                    && x==false
+            ) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("samedi", 530,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -70,10 +79,11 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("samedi") &&
-                    planificationTransport.getDebutPoste() == 1350) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("samedi", 1350);
+                    planificationTransport.getDebutPoste() == 1350 && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("samedi", 1350,agence);
 
-                if (existingRecord == null) {
+                if (existingRecord == null ) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
                     finalPlanificationTransport.setJourSemaine("samedi");
                     finalPlanificationTransport.setDebutPoste(1350);
@@ -93,8 +103,9 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("vendredi") &&
-                    planificationTransport.getDebutPoste() == 530) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("vendredi", 530);
+                    planificationTransport.getDebutPoste() == 530 && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("vendredi", 530,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -116,8 +127,9 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("vendredi") &&
-                    planificationTransport.getDebutPoste() == 1350) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("vendredi", 1350);
+                    planificationTransport.getDebutPoste() == 1350
+                    && planificationTransport.getAgence().equals(agence)&& x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("vendredi", 1350,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -139,8 +151,9 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("jeudi") &&
-                    planificationTransport.getDebutPoste() == 530) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("jeudi", 530);
+                    planificationTransport.getDebutPoste() == 530
+                    && planificationTransport.getAgence().equals(agence)&& x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("jeudi", 530,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -162,8 +175,9 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("jeudi") &&
-                    planificationTransport.getDebutPoste() == 1350) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("jeudi", 1350);
+                    planificationTransport.getDebutPoste() == 1350
+                    && planificationTransport.getAgence().equals(agence)&& x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("jeudi", 1350,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -185,8 +199,9 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("mercredi") &&
-                    planificationTransport.getDebutPoste() == 530) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("mercredi", 530);
+                    planificationTransport.getDebutPoste() == 530
+                    && planificationTransport.getAgence().equals(agence)&& x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("mercredi", 530,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -208,8 +223,9 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("mercredi") &&
-                    planificationTransport.getDebutPoste() == 1350) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("mercredi", 1350);
+                    planificationTransport.getDebutPoste() == 1350 && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("mercredi", 1350,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -231,8 +247,9 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("mardi") &&
-                    planificationTransport.getDebutPoste() == 530) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("mardi", 530);
+                    planificationTransport.getDebutPoste() == 530 && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("mardi", 530,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -254,8 +271,9 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("mardi") &&
-                    planificationTransport.getDebutPoste() == 1350) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("mardi", 1350);
+                    planificationTransport.getDebutPoste() == 1350 && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("mardi", 1350,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -277,8 +295,10 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("lundi") &&
-                    planificationTransport.getDebutPoste() == 530) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("lundi", 530);
+                    planificationTransport.getDebutPoste() == 530
+                    && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("lundi", 530,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -299,8 +319,10 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
                 }
             }      /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("lundi") &&
-                    planificationTransport.getDebutPoste() == 1350) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("lundi", 1350);
+                    planificationTransport.getDebutPoste() == 1350
+                    && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("lundi", 1350,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -322,8 +344,10 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("dimanche") &&
-                    planificationTransport.getDebutPoste() == 530) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("dimanche", 530);
+                    planificationTransport.getDebutPoste() == 530
+                    && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("dimanche", 530,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -345,8 +369,10 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
             }
             /////////////////////////////////////////////////////////////
             if (planificationTransport.getJourSemaine().equals("dimanche") &&
-                    planificationTransport.getDebutPoste() == 1350) {
-                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPoste("dimanche", 1350);
+                    planificationTransport.getDebutPoste() == 1350
+                    && planificationTransport.getAgence().equals(agence)
+                    && x==false) {
+                FinalPlanificationTransport existingRecord = finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaineAndDebutPosteAndAgence("dimanche", 1350,agence);
 
                 if (existingRecord == null) {
                     FinalPlanificationTransport finalPlanificationTransport = new FinalPlanificationTransport();
@@ -383,4 +409,10 @@ public class FinalPlanificationTransportServiceImpl implements FinalPlanificatio
     public FinalPlanificationTransport findFinalPlanificationTransportByjourSemaine(String jourSemaine) {
         return finalPlanificationTransportRepository.findFinalPlanificationTransportByjourSemaine(jourSemaine);
     }
+
+    @Override
+    public void deleteAllData() {
+        finalPlanificationTransportRepository.deleteAll();
+    }
+
 }

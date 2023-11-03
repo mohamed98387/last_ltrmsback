@@ -21,4 +21,9 @@ public class PlanificationTransportRestController {
     public List<PlanificationTransport> addplanificationtransport (@PathVariable("agence") String agence) {
        return this.planificationTransportService.calculPlanificationTransport(agence);
     }
+    @DeleteMapping("/clear-table-PlanficationTransport")
+    public void clearTable() {
+        planificationTransportService.deleteAllData();
+    }
+
 }

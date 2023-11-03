@@ -8,4 +8,5 @@ import java.util.List;
 public interface PlanificationTransportService {
 
     public List<PlanificationTransport> calculPlanificationTransport(String Agence);
+    public void deleteAllData();
 }

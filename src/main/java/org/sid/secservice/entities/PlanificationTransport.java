@@ -21,5 +21,6 @@ public class PlanificationTransport implements Serializable {
     private Integer FinPoste;
     private Integer NombreEmploye;
     private Integer NombresBus;
+    private String Semaine;
 
 }
