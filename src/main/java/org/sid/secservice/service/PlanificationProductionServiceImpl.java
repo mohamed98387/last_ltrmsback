@@ -2,23 +2,29 @@ package org.sid.secservice.service;
 
 import org.apache.poi.ss.usermodel.*;
 import org.sid.secservice.entities.*;
-import org.sid.secservice.repo.AgenceRepository;
-import org.sid.secservice.repo.PlanificationProductionRepository;
-import org.sid.secservice.repo.PlantSectionRepository;
+import org.sid.secservice.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class PlanificationProductionServiceImpl implements PlanificationProductionService {
+    private RecapRepository recapRepository;
     private PlanificationProductionRepository planificationProductionRepository;
     private PlantSectionRepository plantSectionRepository;
+    private EmployeRepository employeRepository;
+
+    public PlanificationProductionServiceImpl(RecapRepository recapRepository) {
+        this.recapRepository = recapRepository;
+    }
 
     public PlanificationProductionServiceImpl(PlanificationProductionRepository planificationProductionRepository) {
         this.planificationProductionRepository = planificationProductionRepository;
@@ -28,10 +34,17 @@ public class PlanificationProductionServiceImpl implements PlanificationProducti
         this.plantSectionRepository = plantSectionRepository;
     }
     @Autowired
-    public PlanificationProductionServiceImpl(PlanificationProductionRepository planificationProductionRepository, PlantSectionRepository plantSectionRepository) {
+    public PlanificationProductionServiceImpl(RecapRepository recapRepository, PlanificationProductionRepository planificationProductionRepository, PlantSectionRepository plantSectionRepository, EmployeRepository employeRepository) {
+        this.recapRepository = recapRepository;
         this.planificationProductionRepository = planificationProductionRepository;
         this.plantSectionRepository = plantSectionRepository;
+        this.employeRepository = employeRepository;
     }
+
+
+
+
+
 
 
 
@@ -41,8 +54,9 @@ public class PlanificationProductionServiceImpl implements PlanificationProducti
         try (Workbook workbook = WorkbookFactory.create(file.getInputStream())) {
             Sheet sheet = workbook.getSheetAt(0); // Assuming the first sheet contains the employee data
             Iterator<Row> rowIterator = sheet.iterator();
-
+            LocalDateTime currentDateTime = LocalDateTime.now();
             List<PlanificationProduction> planificationProductions = new ArrayList<>();
+            List<Recap> recaps = new ArrayList<>();
             if (rowIterator.hasNext()) {
                 rowIterator.next();
             }
@@ -219,17 +233,19 @@ public class PlanificationProductionServiceImpl implements PlanificationProducti
                     } else if (matricule.getCellType() == CellType.STRING) {
                         matriculePlan = Long.parseLong(matricule.getStringCellValue());
                     }
-
-
+                   Employe employe = this.employeRepository.findEmployeByMatricule(matriculePlan);
 
                     PlanificationProduction planificationProduction = new PlanificationProduction(null, matriculePlan, collaborateurPlan, samediPlan, DimanchePlan, LundiPlan, MardiPlan, MercrediPlan, JeudiPlan, vendrediPlan,semaine);
+                    Recap recap = new Recap( null, matriculePlan,collaborateurPlan,employe.getSegment().getCenterCoutSegment(),employe.getPs().getNomPs(),employe.getStation().getRefRegion(),employe.getStation().getRefRegion(),null,samediPlan,DimanchePlan,LundiPlan,MardiPlan,MercrediPlan,JeudiPlan,vendrediPlan,null, currentDateTime);
 
                     planificationProductions.add(planificationProduction);
+                    recaps.add(recap);
                 }
             }
 
             // Save the employees to the database using the employeeRepository
             planificationProductionRepository.saveAll(planificationProductions);
+            this.recapRepository.saveAll(recaps);
         }
     }
 

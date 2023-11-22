@@ -73,7 +73,7 @@ public class FinalPlanificationTransportRestController {
             String fileName = file.getOriginalFilename();
 
             // Call your service method to send the email with the attachment
-            emailService.sendfileByMail(authMail, fileInputStream, fileName);
+            emailService.sendfileByMailPlan(authMail, fileInputStream, fileName);
 
             return ResponseEntity.ok("Email sent successfully with attachment");
         } catch (Exception e) {

@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.headers().frameOptions().disable();
-        http.authorizeRequests().antMatchers("/h2-console/**","/refreshToken/**","/profile","/plantSections",
+        http.authorizeRequests().antMatchers("/h2-console/**","/refreshToken/**","/profile/**","/plantSections",
  "/addplantSection","/remove-plantSection/**","/login/**","/checkEmail","/resetPassword","/addRoleToUser",
  "/users/**","/update-user/**","/roles","/permissions","/addrole","/update-role","/remove-role/**",
  "/addpermission","/update-permission","/remove-permission/**","/import-employees","/remove-user/**"
@@ -69,11 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 "/agences", "/addagence","/update-agence","/remove-agence/**","/addvehicule","/vehicules" ,
   "/update-vehicule","/remove-vehicule/**","/addchauffeur","/chauffeurs","/update-chauffeur","/remove-chauffeur/**"
 ,"/getChauffeurbynom/**","/addcircuit","/circuits","/update-circuit","/remove-circuit/**","/addstation",
-  "/update-station","/stations","/remove-station/**","import-planificationProductions?**","/import-employees",
+  "/update-station","/stations","/remove-station/**","import-planificationProductions?**","/import-employees","/import-employees/**",
                 "/addplanificationtransport/**","/newlPlanificationTransport/**","/lisFinalPlanificationTransports"
-        ,"/clear-table-finalPlanfication","/clear-table-PlanficationTransport","/send-email-with-attachment/**").permitAll();
+        ,"/clear-table-finalPlanfication","/clear-table-PlanficationTransport","/send-email-with-attachment/**","/profile").permitAll();
         //http.formLogin();
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/users/**").hasAuthority("ADMIN") ;
+
+
     //   http.authorizeRequests().antMatchers(HttpMethod.PUT,"/update-user/**").hasAnyAuthority("ADMIN") ;
         http.authorizeRequests().anyRequest().authenticated();
 

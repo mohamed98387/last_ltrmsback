@@ -77,5 +77,29 @@ public class EmailServiceImpl implements EmailService{
             // You may want to log the exception or throw a custom exception
         }
     }
+    @Override
+    @Async
+    public void sendfileByMailPlan(AuthMail authMail, InputStream excelFile, String fileName) {
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
 
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom("mohamedlajmi198@gmail.com");
+            helper.setTo(authMail.getTo());
+            helper.setSubject("Planification de tansport");
+            helper.setText("Hello, this is your Planification this week: " + "\n\nBest regards.");
+
+            // Add the Excel file as an attachment
+            helper.addAttachment(fileName, new ByteArrayResource(IOUtils.toByteArray(excelFile)));
+
+            javaMailSender.send(message);
+
+            System.out.println(authMail.getUsername());
+            System.out.println("Mail sent successfully");
+        } catch (Exception e) {
+            // Handle exceptions, e.g., MailException or IOException
+            e.printStackTrace();
+            // You may want to log the exception or throw a custom exception
+        }
+    }
 }

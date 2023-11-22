@@ -9,4 +9,5 @@ public interface EmailService {
     public void sendCodeByMail(Mail mail);
     public void sendAuthByMail(AuthMail authMail);
     public void sendfileByMail(AuthMail authMail, InputStream excelFile, String fileName);
+    public void sendfileByMailPlan(AuthMail authMail, InputStream excelFile, String fileName);
 }

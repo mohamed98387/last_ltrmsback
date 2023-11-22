@@ -135,7 +135,13 @@ private PasswordEncoder passwordEncoder;
 
     @GetMapping(path = "/profile")
     public AppUser profile(Principal principal) {
-        return accountService.loadUserByUsername(principal.getName());
+        if (principal != null) {
+            return accountService.loadUserByUsername(principal.getName());
+        } else {
+            // Handle the case where principal is null
+            // You might want to return an error response or redirect to a login page.
+            return null;
+        }
     }
 
     // http://localhost:8080/checkEmail
